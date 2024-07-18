@@ -1,0 +1,17 @@
+# eo_data_pipeline/config/hydra_config.yaml
+defaults:
+  - _self_
+
+earth_search:
+  url: "https://earth-search.aws.element84.com/v1"
+
+pipeline:
+  time_steps: 
+    start: "2023-01-01"
+    end: "2023-01-15"
+  aoi: [13.822174072265625, 45.85080395917834, 14.55963134765625, 46.29191774991382]
+  spectral_bands: ["blue", "green", "red", "nir"]  # RGB + NIR
+
+storage:
+  type: "local"
+  path: "./data"

@@ -20,7 +20,7 @@ lint:
 	@$(PYTHON) -m black --check --diff --color .
 	@echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 	@echo "Running Pylint"
-	@pylint akhilsinghrana/
+	@pylint eo_data_pipeline/
 
 format-code:
 	@echo "Running black..."
@@ -33,4 +33,4 @@ test:
 clean:
 	@echo "Cleaning..."
 	@echo $(pscp)
-	@rm -r ./akhilsinghrana/__pycache__/
+	@rm -r ./eo_data_pipeline/__pycache__/
