@@ -25,4 +25,4 @@ jobs:
         poetry install --with dev
     
     - name: run unit tests
-      run: make tests
+      run: make test
