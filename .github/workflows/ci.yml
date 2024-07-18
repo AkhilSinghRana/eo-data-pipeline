@@ -17,6 +17,8 @@ jobs:
     
     - name: install dependencies
       run: |
+        apt-get update && apt-get install -y build-essential libssl-dev libffi-dev python3-dev
+        pip install poetry==1.8.3
         poetry install --with dev
     
     - name: run unit tests
