@@ -20,11 +20,7 @@ class DataFetcher:
         Returns:
             list: List of STAC items matching the search criteria.
         """
-        # Validate parameters
-        ParameterValidator.validate_time_range(time_range)
-        ParameterValidator.validate_aoi(aoi)
-        ParameterValidator.validate_spectral_bands(spectral_bands)
-
+        
         # Create a STAC client
         catalog = pystac_client.Client.open(self.catalog_url)
 
@@ -33,12 +29,11 @@ class DataFetcher:
             collections=["sentinel-2-l2a"],
             datetime=f"{time_range[0]}/{time_range[1]}",
             bbox=aoi,
-            query={"eo:cloud_cover": {"lt": 20}},  # Example: filter for low cloud cover
+            query={"eo:cloud_cover": {"lt": 20}},  # Example: filter for low cloud cover it could be better to have this at config level
         )
 
         # Execute the search and return the items
         items = list(search.items())
-        print(f"Total items found: {len(items)}")
         
         # Filter items based on required bands
         filtered_items = [
@@ -47,6 +42,6 @@ class DataFetcher:
             if all(band in item.assets for band in spectral_bands)
         ]
 
-        print(f"Filtered items count: {len(filtered_items)}")
+        print(f"Total items based on filter criteria in config: {len(filtered_items)}")
         
         return filtered_items

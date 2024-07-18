@@ -1,14 +1,15 @@
+# eo_data_pipeline/data_loader/loader.py
 from omegaconf import DictConfig
 import os
 import logging
 import urllib.request
-
 
 class DataLoader:
     def __init__(self, config: DictConfig):
         self.storage_path = config.storage.path
         logging.basicConfig(level=logging.INFO)
         self.logger = logging.getLogger(__name__)
+
 
     def load_data(self, items, spectral_bands):
         """
