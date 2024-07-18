@@ -27,5 +27,5 @@ jobs:
     
     - name: run unit tests
       run: |
-        poetry shell
+        source $(poetry env info --path)/bin/activate
         make test
