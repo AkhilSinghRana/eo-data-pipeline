@@ -1,0 +1,23 @@
+name: run unit tests
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    name: build_eo_data_pipeline
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: install dependencies
+      run: |
+        poetry install --with dev
+    
+    - name: run unit tests
+      run: make tests

@@ -1,3 +1,4 @@
+# eo_data_pipeline/data_fetcher/fetcher.py
 import pystac_client
 from omegaconf import DictConfig
 from .validator import ParameterValidator
@@ -38,10 +39,7 @@ class DataFetcher:
         # Execute the search and return the items
         items = list(search.items())
         print(f"Total items found: {len(items)}")
-        for item in items:
-            print(f"Item ID: {item.id}")
-            print(f"Item Assets: {list(item.assets.keys())}")
-
+        
         # Filter items based on required bands
         filtered_items = [
             item
@@ -50,8 +48,5 @@ class DataFetcher:
         ]
 
         print(f"Filtered items count: {len(filtered_items)}")
-        for item in filtered_items:
-            print(f"Filtered Item ID: {item.id}")
-            print(f"Filtered Item Assets: {list(item.assets.keys())}")
-
+        
         return filtered_items

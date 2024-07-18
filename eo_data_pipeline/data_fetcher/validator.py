@@ -1,7 +1,6 @@
 # eo_data_pipeline/data_fetcher/validator.py
 from datetime import datetime
 
-
 class ParameterValidator:
     @staticmethod
     def validate_time_range(time_range):
