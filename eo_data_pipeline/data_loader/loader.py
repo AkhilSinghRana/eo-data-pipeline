@@ -30,6 +30,7 @@ class DataLoader:
             os.makedirs(self.storage_path)
             self.logger.info(f"Created storage path: {self.storage_path}")
 
+        
         # Ensure Catalog path exists
         if not os.path.exists(self.catalog_path):
             os.makedirs(self.catalog_path)
@@ -50,6 +51,7 @@ class DataLoader:
                     saved_files.append(file_path)
                     self.logger.info(f"Saved file: {file_path}")
 
+            self.logger.info("Creating Metaddata STAC")
             # Add STAC item to PySTAC catalog
             catalog.add_item(item)
 

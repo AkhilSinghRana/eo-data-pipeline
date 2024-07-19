@@ -19,6 +19,7 @@ prefect = "^2.19.8"
 planetary-computer = "^1.0.0"
 shapely = "^2.0.5"
 rasterio = "^1.3.10"
+rioxarray = "^0.16.0"
 [tool.poetry.group.dev]
 optional = true
 
