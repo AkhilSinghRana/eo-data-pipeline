@@ -59,8 +59,6 @@ We welcome contributions to the EO Data Pipeline! Please see our [contributing g
 
 | Workflow | Status |
 | --- | --- |
-| Lint | [![Lint](https://github.com/AkhilSinghRana/eo-data-pipeline/actions/workflows/lint.yml/badge.svg)](https://github.com/AkhilSinghRana/eo-data-pipeline/actions/workflows/lint.yml) |
-| Tests | [![Tests](https://github.com/AkhilSinghRana/eo-data-pipeline/actions/workflows/tests.yml/badge.svg)](https://github.com/AkhilSinghRana/eo-data-pipeline/actions/workflows/tests.yml) |
-| Build and Deploy | [![Build and Deploy](https://github.com/AkhilSinghRana/eo-data-pipeline/actions/workflows/build-deploy.yml/badge.svg)](https://github.com/AkhilSinghRana/eo-data-pipeline/actions/workflows/build-deploy.yml) |
+| Tests | [![Tests](https://github.com/AkhilSinghRana/eo-data-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/AkhilSinghRana/eo-data-pipeline/actions/workflows/ci.yml) |
 
 ---
