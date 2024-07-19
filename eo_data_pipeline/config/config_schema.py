@@ -25,6 +25,7 @@ class PipelineConfig:
 class StorageConfig:
     type: str
     path: str
+    catalog_path: str
 
 
 @dataclass
