@@ -1,6 +1,8 @@
 import rasterio
+
+
 class DataAccessLayer:
-    def __init__(self, path:str):
+    def __init__(self, path: str):
         self.storage_path = path
 
     def load_data(self):
@@ -12,8 +14,6 @@ class DataAccessLayer:
         """
         with rasterio.open(self.storage_path) as src:
             data = src.read()
-            self.transform = src.transform # Optional just for debugging or plotting
-            self.crs = src.crs # Optional just for debugging or plotting
+            self.transform = src.transform  # Optional just for debugging or plotting
+            self.crs = src.crs  # Optional just for debugging or plotting
         return data
-
-    

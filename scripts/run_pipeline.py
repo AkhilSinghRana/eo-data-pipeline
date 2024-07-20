@@ -1,3 +1,4 @@
+# scripts/run_pipeline.py
 import hydra
 from omegaconf import DictConfig, OmegaConf
 from eo_data_pipeline.pipeline.flow import run_pipeline
@@ -10,7 +11,6 @@ from eo_data_pipeline.config.config_schema import (
     StorageConfig,
 )
 
-# Register the configuration schema with Hydra's config store
 cs = ConfigStore.instance()
 cs.store(name="hydra_config", node=Config)
 
@@ -32,7 +32,10 @@ def main(config: DictConfig):
         ),
         storage=StorageConfig(**config_dict["storage"]),
     )
-    run_pipeline(config_instance)
+
+    # Run the pipeline
+    result = run_pipeline(config_instance)
+    print(f"Pipeline execution completed. Result: {result}")
 
 
 if __name__ == "__main__":

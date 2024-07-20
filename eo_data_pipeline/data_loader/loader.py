@@ -5,12 +5,37 @@ import logging
 import urllib.request
 from pystac import Catalog, Item
 
+
 class DataLoader:
     def __init__(self, config: DictConfig):
         self.storage_path = config.storage.path
         self.catalog_path = config.storage.catalog_path
         logging.basicConfig(level=logging.INFO)
         self.logger = logging.getLogger(__name__)
+
+    def save_metadata(self, items: list):
+        """Helper function to save metadata
+
+        Args:
+            items (list): saved fetched EartSearch Catalog into PySTAC format
+
+        """
+        # Ensure Catalog path exists
+        if not os.path.exists(self.catalog_path):
+            os.makedirs(self.catalog_path)
+            self.logger.info(f"Created catalog path: {self.catalog_path}")
+
+        # Create PySTAC catalog
+        catalog = Catalog(
+            id="my-catalog", description="PySTAC catalog for saving Metadata"
+        )
+
+        for item in items:
+            # Add STAC item to PySTAC catalog
+            catalog.add_item(item)
+        # Save PySTAC catalog to disk
+        catalog.normalize_hrefs(self.catalog_path)
+        catalog.save(catalog_type="SELF_CONTAINED")
 
     def load_data(self, items, spectral_bands):
         """
@@ -30,15 +55,6 @@ class DataLoader:
             os.makedirs(self.storage_path)
             self.logger.info(f"Created storage path: {self.storage_path}")
 
-        
-        # Ensure Catalog path exists
-        if not os.path.exists(self.catalog_path):
-            os.makedirs(self.catalog_path)
-            self.logger.info(f"Created catalog path: {self.catalog_path}")
-
-        # Create PySTAC catalog
-        catalog = Catalog(id="my-catalog", description="PySTAC catalog for saving Metadata")
-
         for item in items:
             for band in spectral_bands:
                 asset = item.assets.get(band)
@@ -50,14 +66,6 @@ class DataLoader:
                     self.download_asset(asset.href, file_path)
                     saved_files.append(file_path)
                     self.logger.info(f"Saved file: {file_path}")
-
-            self.logger.info("Creating Metaddata STAC")
-            # Add STAC item to PySTAC catalog
-            catalog.add_item(item)
-
-        # Save PySTAC catalog to disk
-        catalog.normalize_hrefs(self.catalog_path)
-        catalog.save(catalog_type="SELF_CONTAINED")
 
         self.logger.info(f"Total files saved: {len(saved_files)}")
         return saved_files
