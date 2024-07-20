@@ -1,5 +1,8 @@
 # eo_data_pipeline/data_fetcher/validator.py
+## Validator helper functions makes sure that our config is free from errors and there is not human error, 
+## Also makes sure that the config follows EarthSearchCatalog recommendations
 from datetime import datetime
+
 
 class ParameterValidator:
     @staticmethod

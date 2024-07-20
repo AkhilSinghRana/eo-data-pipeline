@@ -16,3 +16,4 @@ storage:
   type: "local"
   path: "./data/raw/"
   catalog_path: "./data/catalog_metadata/"
+

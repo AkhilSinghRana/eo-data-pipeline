@@ -7,7 +7,7 @@ class DataAccessLayer:
 
     def load_data(self):
         """
-        Load data for the specified item and band.
+        Helper function to load data for the specified item and band.
 
         Returns:
             numpy.ndarray: Array containing the data for the specified item and band.

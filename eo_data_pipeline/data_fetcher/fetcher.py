@@ -37,7 +37,7 @@ class DataFetcher:
         # Execute the search and return the items
         items = list(search.items())
 
-        # Filter items based on required bands
+        # Filter items based on required bands all bands should be present otherwise item will be dropped
         filtered_items = [
             item
             for item in items

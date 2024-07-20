@@ -1,15 +1,9 @@
 from prefect import flow, task
-from prefect.deployments import Deployment
-from prefect.filesystems import LocalFileSystem
-from prefect.deployments import run_deployment
 from eo_data_pipeline.data_fetcher.fetcher_copy import DataFetcher
 from eo_data_pipeline.data_fetcher.validator import ParameterValidator
 from eo_data_pipeline.data_loader.loader import DataLoader
 from eo_data_pipeline.config.config_schema import Config
-import hydra
-from itertools import islice
 
-from omegaconf import DictConfig, OmegaConf
 import logging
 
 
