@@ -8,9 +8,9 @@ earth_search:
 pipeline:
   time_steps: 
     start: "2023-01-01"
-    end: "2023-02-25"
+    end: "2023-02-05"
   aoi: [13.822174072265625, 45.85080395917834, 14.55963134765625, 46.29191774991382]
-  spectral_bands: [ "blue", "nir"]  # RGB + NIR
+  spectral_bands: [ "blue", "nir"]  # Blue + NIR
 
 storage:
   type: "local"

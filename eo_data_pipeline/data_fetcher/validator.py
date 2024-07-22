@@ -1,12 +1,27 @@
 # eo_data_pipeline/data_fetcher/validator.py
-## Validator helper functions makes sure that our config is free from errors and there is not human error, 
-## Also makes sure that the config follows EarthSearchCatalog recommendations
+
 from datetime import datetime
 
 
 class ParameterValidator:
+    """
+    A utility class for validating input parameters for the Earth Observation data pipeline.
+
+    This class provides static methods to validate time ranges, areas of interest (AOI),
+    and spectral bands according to the Earth Search Catalog recommendations.
+    """
+
     @staticmethod
     def validate_time_range(time_range):
+        """
+        Validate the given time range.
+
+        Args:
+            time_range (list): A list containing start and end dates in 'YYYY-MM-DD' format.
+
+        Raises:
+            ValueError: If the date format is invalid or if the start date is after the end date.
+        """
         try:
             start = datetime.strptime(time_range[0], "%Y-%m-%d")
             end = datetime.strptime(time_range[1], "%Y-%m-%d")
@@ -18,6 +33,15 @@ class ParameterValidator:
 
     @staticmethod
     def validate_aoi(aoi):
+        """
+        Validate the given Area of Interest (AOI).
+
+        Args:
+            aoi (list): A list of 4 coordinates [lon_min, lat_min, lon_max, lat_max].
+
+        Raises:
+            ValueError: If the AOI format is invalid or if the coordinates are out of bounds.
+        """
         if len(aoi) != 4:
             raise ValueError(
                 f"AOI must be a list of 4 coordinates: [lon_min, lat_min, lon_max, lat_max], received: {aoi}"
@@ -30,6 +54,15 @@ class ParameterValidator:
 
     @staticmethod
     def validate_spectral_bands(spectral_bands):
+        """
+        Validate the given spectral bands.
+
+        Args:
+            spectral_bands (list): A list of spectral band names.
+
+        Raises:
+            ValueError: If any of the specified bands are not valid Sentinel-2 bands.
+        """
         valid_bands = {
             "aot",
             "blue",

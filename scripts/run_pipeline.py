@@ -1,15 +1,13 @@
 # scripts/run_pipeline.py
 import hydra
-from omegaconf import DictConfig, OmegaConf
-from eo_data_pipeline.pipeline.flow import run_pipeline
 from hydra.core.config_store import ConfigStore
-from eo_data_pipeline.config.config_schema import (
-    Config,
-    EarthSearchConfig,
-    TimeStepsConfig,
-    PipelineConfig,
-    StorageConfig,
-)
+from omegaconf import DictConfig, OmegaConf
+
+from eo_data_pipeline.config.config_schema import (Config, EarthSearchConfig,
+                                                   PipelineConfig,
+                                                   StorageConfig,
+                                                   TimeStepsConfig)
+from eo_data_pipeline.pipeline.flow import run_pipeline
 
 cs = ConfigStore.instance()
 cs.store(name="hydra_config", node=Config)

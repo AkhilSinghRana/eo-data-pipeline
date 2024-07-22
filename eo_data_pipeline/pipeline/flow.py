@@ -1,10 +1,11 @@
+import logging
+
 from prefect import flow, task
-from eo_data_pipeline.data_fetcher.fetcher_copy import DataFetcher
+
+from eo_data_pipeline.config.config_schema import Config
+from eo_data_pipeline.data_fetcher.fetcher import DataFetcher
 from eo_data_pipeline.data_fetcher.validator import ParameterValidator
 from eo_data_pipeline.data_loader.loader import DataLoader
-from eo_data_pipeline.config.config_schema import Config
-
-import logging
 
 
 @task(name="Validate Inputs", log_prints=True)

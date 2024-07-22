@@ -1,11 +1,13 @@
-import pytest
 import os
 import tempfile
-from unittest.mock import patch, Mock
-from omegaconf import DictConfig
-from eo_data_pipeline.data_loader.loader import DataLoader
-from pystac import Item, Asset
 from datetime import datetime
+from unittest.mock import Mock, patch
+
+import pytest
+from omegaconf import DictConfig
+from pystac import Asset, Item
+
+from eo_data_pipeline.data_loader.loader import DataLoader
 
 
 @pytest.fixture

@@ -1,5 +1,7 @@
-import pytest
 from datetime import datetime
+
+import pytest
+
 from eo_data_pipeline.data_fetcher.validator import ParameterValidator
 
 

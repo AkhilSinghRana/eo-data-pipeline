@@ -1,6 +1,8 @@
-import pytest
 from unittest.mock import MagicMock
+
+import pytest
 from omegaconf import DictConfig
+
 from eo_data_pipeline.data_fetcher.fetcher import DataFetcher
 
 
