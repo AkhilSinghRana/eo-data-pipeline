@@ -1,3 +1,14 @@
+
+---
+
+## GitHub Workflows Status
+
+| Workflow | Status |
+| --- | --- |
+| Tests | [![Tests](https://github.com/AkhilSinghRana/eo-data-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/AkhilSinghRana/eo-data-pipeline/actions/workflows/ci.yml) |
+
+---
+
 # EO Data Pipeline
 
 The EO Data Pipeline is a Python package for generating data pipelines to fetch Earth Observation (EO) data from the EarthSearchCatalog.
@@ -16,23 +27,26 @@ The EO Data Pipeline is a Python package for generating data pipelines to fetch 
 ## Installation
 
 1. Install Poetry if you haven't already:
-curl -sSL https://install.python-poetry.org | python3 -
 
+    ```curl -sSL https://install.python-poetry.org | python3 -```
 
 2. Clone this repository:
-git clone https://github.com/your-username/eo-data-pipeline.git
+
+    ```git clone https://github.com/your-username/eo-data-pipeline.git```
 
 
 3. Change to the project directory:
-cd eo-data-pipeline
 
+    ```cd eo-data-pipeline```
 
 4. Install the package dependencies using Poetry:
-poetry install
+
+    ```poetry install```
 
 
 If you want to install development dependencies, use:
-poetry install --with dev
+    
+    poetry install --with dev
 
 
 ## Usage
@@ -52,13 +66,3 @@ You can find helper notebooks in the `notebooks` directory to visualize and anal
 
 We welcome contributions to the EO Data Pipeline! Please see our [contributing guidelines](CONTRIBUTING.md) (*To be added) for more information.
 
-
----
-
-## GitHub Workflows
-
-| Workflow | Status |
-| --- | --- |
-| Tests | [![Tests](https://github.com/AkhilSinghRana/eo-data-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/AkhilSinghRana/eo-data-pipeline/actions/workflows/ci.yml) |
-
----

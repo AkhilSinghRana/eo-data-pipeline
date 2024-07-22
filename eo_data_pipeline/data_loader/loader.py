@@ -1,23 +1,65 @@
 # eo_data_pipeline/data_loader/loader.py
-from omegaconf import DictConfig
-import os
+
 import logging
+import os
 import urllib.request
+
+from omegaconf import DictConfig
 from pystac import Catalog, Item
 
+
 class DataLoader:
+    """
+    A class for loading and saving Earth Observation data and metadata.
+
+    This class handles the storage of fetched data and metadata, including
+    saving STAC items to a PySTAC catalog and downloading asset files.
+
+    Attributes:
+        storage_path (str): Path to store downloaded asset files.
+        catalog_path (str): Path to store the PySTAC catalog.
+        logger (logging.Logger): Logger for this class.
+    """
+
     def __init__(self, config: DictConfig):
+        """
+        Initialize the DataLoader with the given configuration.
+
+        Args:
+            config (DictConfig): Configuration containing storage paths.
+        """
         self.storage_path = config.storage.path
         self.catalog_path = config.storage.catalog_path
         logging.basicConfig(level=logging.INFO)
         self.logger = logging.getLogger(__name__)
 
-    def load_data(self, items, spectral_bands):
+    def save_metadata(self, items: list):
         """
-        Load data into the specified storage system.
+        Save metadata of STAC items to a PySTAC catalog.
 
         Args:
-            items (list): List of STAC items to load.
+            items (list): List of STAC items to save as metadata.
+        """
+        # Ensure Catalog path exists
+        if not os.path.exists(self.catalog_path):
+            os.makedirs(self.catalog_path)
+            self.logger.info(f"Created catalog path: {self.catalog_path}")
+
+        # Create and save PySTAC catalog
+        catalog = Catalog(
+            id="my-catalog", description="PySTAC catalog for saving Metadata"
+        )
+        for item in items:
+            catalog.add_item(item)
+        catalog.normalize_hrefs(self.catalog_path)
+        catalog.save(catalog_type="SELF_CONTAINED")
+
+    def load_data(self, items, spectral_bands):
+        """
+        Load data by downloading assets for specified STAC items and spectral bands.
+
+        Args:
+            items (list): List of STAC items to load data from.
             spectral_bands (list): List of spectral bands to load.
 
         Returns:
@@ -29,15 +71,6 @@ class DataLoader:
         if not os.path.exists(self.storage_path):
             os.makedirs(self.storage_path)
             self.logger.info(f"Created storage path: {self.storage_path}")
-
-        
-        # Ensure Catalog path exists
-        if not os.path.exists(self.catalog_path):
-            os.makedirs(self.catalog_path)
-            self.logger.info(f"Created catalog path: {self.catalog_path}")
-
-        # Create PySTAC catalog
-        catalog = Catalog(id="my-catalog", description="PySTAC catalog for saving Metadata")
 
         for item in items:
             for band in spectral_bands:
@@ -51,20 +84,12 @@ class DataLoader:
                     saved_files.append(file_path)
                     self.logger.info(f"Saved file: {file_path}")
 
-            self.logger.info("Creating Metaddata STAC")
-            # Add STAC item to PySTAC catalog
-            catalog.add_item(item)
-
-        # Save PySTAC catalog to disk
-        catalog.normalize_hrefs(self.catalog_path)
-        catalog.save(catalog_type="SELF_CONTAINED")
-
         self.logger.info(f"Total files saved: {len(saved_files)}")
         return saved_files
 
     def download_asset(self, url, file_path):
         """
-        Download the asset from the given URL to the specified file path.
+        Download an asset from a given URL to a specified file path.
 
         Args:
             url (str): URL of the asset to download.

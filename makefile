@@ -21,10 +21,18 @@ lint:
 	@echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 	@echo "Running Pylint"
 	@pylint eo_data_pipeline/
+	
+	@echo "Running black in check mode..."
+	@$(PYTHON) -m black --check --diff --color .
+	@echo "Running isort in check mode..."
+	@$(PYTHON) -m isort --check-only --diff .
 
 format-code:
 	@echo "Running black..."
 	@$(PYTHON) -m black .
+	@echo "Running isort..."
+	@$(PYTHON) -m isort .
+
 
 test:
 	@echo "Running tests..."
